@@ -1,0 +1,28 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Blog: {{ Post.title }}{% endblock %}
+
+{% block content %}
+<h3><a href="{% url 'post' Post.id %}">{{ Post.title }}</a></h3>
+<h6> on {{Post.date}} </h6>
+<div class="post-img">
+    <img src="{{Post.image.url}}" style="width: 200px; height=150px"/>
+</div>
+<div class="post-body">
+{{Post.body|safe|linebreaksbr}}
+{% for comment in Post.comments.all %}
+    <h4>Author: {{comment.author}}</h4>
+    <h6>Comment date: {{comment.date}}</h6>
+    <p>{{comment.body|linebreaksbr}}</p>
+{% endfor %}
+{% if user.username %}
+    <form action="{% url 'post' Post.id %}" method="POST">
+        {% csrf_token %}
+        <p><label>Comment: </label></p>\
+        {{form.body}}
+        <br/>
+        <input type="submit" value="Submit comment">
+    </form>
+{% endif %}
+</div>
+{% endblock %}

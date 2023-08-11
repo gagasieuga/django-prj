@@ -13,13 +13,73 @@
             <div class="col-sm-4">
                 <img src={% static 'images/avatar.jfif'%} class="responsive-image" style="max-height:150px" />
             </div>   
-            <div class="col-sm-8">
+            <div class="col-sm-7">
                 <h1>Test text</h1>
+            </div>   
+            <div class="col-sm-1">
+                {% if user.username %}
+                    <p>Hello {{user.username}}</p>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-outline-primary">Register</a>
+                {% endif %}
+            </div>
+        </div>   
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="bs-sidebar">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="#">Personal Information</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'list' %}">Blogs</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>   
+            <div class="col-sm-8">
+                <div class="container-fluid">  
+                    {% block content %}
+                    {% endblock %}
+                </div>
             </div>   
         </div>   
     </div> 
-    Content of the base template
-    {% block content %}
-    {% endblock %}
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container text-center text-md-left">
+            <div class="row text-center">
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-warning"> Hello </h5>
+                    <p> This is an example description </p>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-warning"> Other links </h5>
+                    <p> <a href="#" class="text-white" style="text-decoration: none;">This is an example link </a/> </p>
+                    <p> <a href="#" class="text-white" style="text-decoration: none;">This is an example link </a/> </p>
+                    <p> <a href="#" class="text-white" style="text-decoration: none;">This is an example link </a/> </p>
+                    <p> <a href="#" class="text-white" style="text-decoration: none;">This is an example link </a/> </p>
+                </div>
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-warning"> about </h5>
+                    <p> <i class="fas fa-home mr-3"></i> Hanoi, Truong Chinh Street 102, VN </a/> </p>
+                    <p> <i class="fas fa-home mr-3"></i> bepham0304@gmail.com </a/> </p>
+                    <p> <i class="fas fa-phone mr-3"></i> +84 1234 5678 </a/> </p>
+                </div>
+            </div> 
+            <hr class="mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-3 col-lg-12">
+                    <p> Copyright ©2023 by: <a href="#" class="mb-4 font-weight-bold text-warning" style="text-decoration:none;">Be Pham</a> </p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
 </body>
 </html>
+
